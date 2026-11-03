@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-espresso: #33261f;
+  --color-caramel: #c99260;
+  --color-lilac: #c4bfdf;
+  --color-white: #ffffff;
+  /* Neutral divider derived from espresso; never a decorative colored border. */
+  --color-line: rgb(51 38 31 / 0.12);
+  --color-muted: rgb(51 38 31 / 0.7);
+
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-spline-mono), ui-monospace, monospace;
+  --font-display: var(--font-young-serif), ui-serif, Georgia, serif;
+
+  --shadow-*: initial;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-espresso);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-espresso);
+  outline-offset: 2px;
+}
+
+[data-dark-surface] :focus-visible {
+  outline-color: var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

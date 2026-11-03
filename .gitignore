@@ -1,0 +1,30 @@
+# Secrets and machine-local settings
+.env
+.env.*
+!.env.example
+*.pem
+
+# JavaScript
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+*-debug.log*
+
+# Python and tools used by upcoming milestones
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+dbt_packages/
+transforms/target/
+transforms/logs/
+
+# Private runtime data and local artifacts
+data/
+uploads/
+.DS_Store
+Thumbs.db
