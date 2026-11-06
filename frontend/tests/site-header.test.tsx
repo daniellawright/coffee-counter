@@ -9,7 +9,7 @@ it("opens and closes the mobile menu and closes it after navigation", async () =
   expect(screen.queryByRole("navigation", { name: "Mobile" })).not.toBeInTheDocument();
   await user.click(screen.getByRole("button", { name: "Open menu" }));
   expect(screen.getByRole("button", { name: "Close menu" })).toHaveAttribute("aria-expanded", "true");
-  await user.click(within(screen.getByRole("navigation", { name: "Mobile" })).getByRole("link", { name: "About CoffeeCounter" }));
+  await user.click(within(screen.getByRole("navigation", { name: "Mobile" })).getByRole("link", { name: "About" }));
   expect(screen.queryByRole("navigation", { name: "Mobile" })).not.toBeInTheDocument();
   await user.click(screen.getByRole("button", { name: "Open menu" }));
   await user.click(screen.getByRole("button", { name: "Close menu" }));

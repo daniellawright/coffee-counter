@@ -1,33 +1,56 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
+import { ArrowRightIcon, CoffeeIcon, ForecastIcon, ReceiptIcon, RevenueIcon, type IconProps } from "@/components/icons/Icons";
+import { Card } from "@/components/ui/Card";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { counterMetrics } from "@/lib/content";
 
-/** Minimal overview: one heading, the four headline figures, one honest status line. */
+const metricIcons: Record<string, (p: IconProps) => ReactNode> = {
+  "Total revenue": RevenueIcon,
+  Transactions: ReceiptIcon,
+  "Average purchase": CoffeeIcon,
+  "Sales growth": ForecastIcon,
+};
+
+/** Four outlined metric cards, then one honest status row. */
 export function Overview() {
   return (
     <>
-      <h1 className="font-display text-4xl sm:text-5xl">Overview</h1>
-      <p className="mt-3 max-w-2xl text-muted">Nothing to count yet. Your sales figures will appear here after your first import.</p>
+      <PageHeader title="Overview">Nothing to count yet. Your sales figures will appear here after your first import.</PageHeader>
 
-      <dl className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-line pt-10 lg:grid-cols-4">
-        {counterMetrics.map(({ label, value }) => (
-          <div key={label}>
-            <dt className="text-sm text-muted">{label}</dt>
-            <dd className="mt-2 text-4xl font-medium tabular-nums">
-              {value ?? (
-                <>
-                  <span aria-hidden="true">—</span>
-                  <span className="sr-only">No data yet</span>
-                </>
-              )}
-            </dd>
-          </div>
-        ))}
+      <dl className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        {counterMetrics.map(({ label, value }) => {
+          const Icon = metricIcons[label];
+          return (
+            <Card key={label}>
+              <dt className="flex items-center gap-3 text-sm text-muted">
+                {Icon ? (
+                  <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lilac text-espresso">
+                    <Icon size={18} />
+                  </span>
+                ) : null}
+                {label}
+              </dt>
+              <dd className="mt-5 text-3xl font-medium tabular-nums">
+                {value ?? (
+                  <>
+                    <span aria-hidden="true" className="text-espresso/35">—</span>
+                    <span className="sr-only">No data yet</span>
+                  </>
+                )}
+              </dd>
+            </Card>
+          );
+        })}
       </dl>
 
-      <p className="mt-16 text-sm text-muted">
-        No business connected. Imports are still in development.{" "}
-        <Link href="/about#how-it-works" className="rounded-sm text-espresso underline decoration-espresso/30 underline-offset-4 hover:decoration-espresso">How imports will work</Link>
-      </p>
+      <Card className="mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-4 text-sm">
+        <p className="text-muted">No business connected. Imports are still in development.</p>
+        <Link href="/about#how-it-works" className="inline-flex items-center gap-1.5 rounded-sm font-medium hover:text-espresso/70">
+          How imports will work
+          <ArrowRightIcon size={16} />
+        </Link>
+      </Card>
     </>
   );
 }

@@ -8,6 +8,8 @@
   /* Neutral divider derived from espresso; never a decorative colored border. */
   --color-line: rgb(51 38 31 / 0.12);
   --color-muted: rgb(51 38 31 / 0.7);
+  /* Quiet neutral panel (espresso at 4%) so white content, like the receipt, reads against it. */
+  --color-surface: rgb(51 38 31 / 0.04);
 
   --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-spline-mono), ui-monospace, monospace;
@@ -44,5 +46,37 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Home receipts slide up from below, one after the other (user request 2026-11-04).
+ * They start hidden and offset; Reveal sets data-revealed="true" when they scroll into
+ * view, and each receipt's --rise-delay staggers them. Reduced motion shows them still.
+ */
+.receipt-rise {
+  opacity: 0;
+  translate: 0 130%; /* starts below the dark panel, which clips it */
+}
+
+[data-revealed="true"] .receipt-rise {
+  animation: receipt-rise 1000ms cubic-bezier(0.22, 1, 0.36, 1) var(--rise-delay, 0ms) both;
+}
+
+@keyframes receipt-rise {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .receipt-rise {
+    opacity: 1;
+    translate: none;
+  }
+
+  [data-revealed="true"] .receipt-rise {
+    animation: none !important;
   }
 }

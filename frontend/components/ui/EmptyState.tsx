@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { IconProps } from "@/components/icons/Icons";
 
-/** Honest placeholder. White icon on an espresso badge, then plain copy. */
+/** Honest placeholder: espresso icon on a lilac badge, then plain copy. */
 export function EmptyState({
   icon: Icon,
   title,
@@ -15,12 +15,12 @@ export function EmptyState({
 }) {
   return (
     <div className="max-w-xl">
-      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-espresso">
-        <Icon size={24} />
+      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-lilac text-espresso">
+        <Icon size={22} />
       </span>
-      <h2 className="mt-6 text-lg font-semibold">{title}</h2>
+      <h2 className="mt-5 text-lg font-semibold">{title}</h2>
       <div className="mt-2 leading-relaxed text-muted">{children}</div>
-      {action ? <div className="mt-8">{action}</div> : null}
+      {action ? <div className="mt-7">{action}</div> : null}
     </div>
   );
 }

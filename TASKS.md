@@ -4,6 +4,45 @@ Status: **Milestone 1 complete (2026-10-28)**. Next: **Milestone 2 — Real Data
 
 Repository review: M1 was partially complete at handoff; M2–M10 had no implementation beyond empty directories. M1 is now implemented and checked as described below. M2–M10 remain not started.
 
+## Homepage refresh: contrast receipts, tally marks, dashboard + sample-data note (2026-11-04)
+- [x] Receipts redone with different contents and more contrast: a dark espresso panel holds a white "Without counting" receipt (four questions answered "a hunch"/"a guess", "Cups counted: none") and a lilac "With CoffeeCounter" receipt (the same questions plus weather and data freshness, each marked Brewing, with "Brewing: in development" printed at the top). They still rise one after the other; the second is cropped by the panel edge. `Receipt` gained a `paper` option (white | lilac) and `ReceiptTotal`.
+- [x] Hero: a row of five caramel tally marks above the catchphrase; "Most coffee shops" softened to "Many coffee shops" (no unsourced statistic).
+- [x] Dashboard link: "Open dashboard" (primary) to `/dashboard` and "Explore the demo" (new outline button variant) to `/demo`.
+- [x] Sample data: a "Try it with sample data" note says the demo is being set up with a public dataset of real coffee vending machine sales, explorable without an account, and that it is not connected yet (dashboard empty for now, no made-up numbers). It must not claim the demo works until Milestone 2 connects the dataset.
+- Animation start: the receipts begin when the panel scrolls into view; on a 900px-high window it now sits below the fold, so they start once the visitor scrolls. Sampled in Edge after scrolling: first lands by ~1.1s, second starts after and lands by ~2.3s; reduced motion shows them immediately.
+- Verification: lint, `tsc --noEmit`, **33 tests**, and production build passed. Header items still centered at y=32 on / and /login. Visual checks in headless Edge: full homepage at 1440px, scrolled homepage at 390px with device emulation.
+
+## Homepage, route swap, header fix, About (2026-11-04, reverses the "/ is the dashboard" decision below)
+- [x] Routes: `/` is now a homepage inside the public layout (header + footer, same as `/login`); `/dashboard` is the Overview inside the sidebar shell (no longer a redirect). Updated the sidebar Overview link, active-state matching (`/dashboard` matches exactly), public header/footer links, placeholder buttons, and About's "Open dashboard".
+- [x] Header alignment: the logo was an inline-flex element inside an inline link, which left a line-box gap below it and pushed it up. It is now a block-level flex. Measured in Edge at 1440px on `/` and `/login`: logo mark, wordmark, all nav links and both buttons are centered at y=32, the center of the header's content area. (I did not measure the old state before fixing.)
+- [x] Homepage: "Every cup counts." in the display font; two paragraphs (the problem, then what CoffeeCounter is being built to do, in-development wording, no performance claims); two tilted receipts (menu; how imports will work) that slide up from below one after the other. Animation is pure CSS, started by an IntersectionObserver when the receipts scroll into view (`Reveal.tsx`). Sampled in Edge: first receipt lands by ~1.1s, second starts after and lands by ~2.2s; with prefers-reduced-motion both show immediately.
+- [x] About: heading, tab title, and navigation labels are now "About" (was "About CoffeeCounter"); added a Disclaimer that Claude, an AI assistant made by Anthropic, was used as an assistant for this project.
+- Verification: lint, `tsc --noEmit`, **32 tests**, and production build passed; HTTP 200 for /, /dashboard, /about, /login, /dashboard/sales. Visual checks in headless Edge: homepage full page at 1440px, scrolled homepage at 390px with device emulation.
+- Note: `.next` got into a bad state once this session (`routesManifest.dataRoutes is not iterable`) and a build earlier failed once with `no direct app page entry found for /_not-found`; a clean rebuild fixed both. The repo sits inside OneDrive, whose sync may be touching `.next`; consider excluding `frontend/.next` and `node_modules` from sync.
+
+## Sidebar restyled to the user's mockup (2026-11-04, supersedes the white sidebar below)
+- [x] Sidebar is a permanent 248px espresso column again: logo + wordmark, mono group labels (Analyze / Data / Workspace; "Insights" renamed to "Analyze"), hairline-separated groups, edge-to-edge rows, current page = lighter row + 3px caramel bar, 18px icons at 1.6px stroke. Account stays a plain link at the foot; the mockup's invented business name and avatar were not copied. Mobile top bar and menu toggle restyled to match.
+- Everything else (page content, cards, receipt, header, logo, fonts) unchanged.
+- Verification: lint, **29 tests**, and production build passed. Checked in headless Edge: Sales page at 1440px; open menu at 390px with device emulation.
+
+## Restructure: permanent outlined sidebar (2026-11-04, supersedes the hover-rail items below)
+- [x] Sidebar: always expanded 256px white column with espresso right outline; logo + wordmark, labeled groups (Insights / Data / Workspace), lilac outlined selected pill, outlined Account box at the foot. Removed the hover/focus expansion and its transition; mobile keeps a top bar and menu toggle.
+- [x] Shell: content lives in its own column (no overlay, no padding workaround), centered up to 1152px.
+- [x] Outlines: 1px espresso on `Card`, Overview cards and status row, About receipt panel, the mobile menu toggle, and the public header. Page background stays white; dividers stay the faint `line` tone.
+- [x] Overview: four separate outlined metric cards with a lilac icon badge (Total revenue, Transactions, Average purchase, Sales growth); values remain "No data yet". Added revenue, receipt, and coffee icons to the generator (16 total). Section content is otherwise unchanged.
+- Not copied from the reference design: search box, notification bell, avatar, shadows, emoji, and its sample figures (all would be decorative or fabricated).
+- Verification: lint and **29 tests** passed; production build passed. Checked in headless Edge: Overview, About at 1440px; About and the open menu at 390px with device emulation.
+- Note: an earlier production build in this session failed once with `Invariant: no direct app page entry found for /_not-found` and passed on an immediate rerun with no changes.
+
+## Professional polish: Tabler icons, new logo, sidebar motion, calmer About receipt (2026-11-04)
+- [x] Icons: Humbleicons -> Tabler Icons (MIT, Paweł Kuna). Icons now inherit text color (white on the rail, espresso on lilac badges). Generator, license file, and About credit updated.
+- [x] Logo: new caramel bean whose seam is a rising line (`public/brand/coffee-counter-logo.svg`, favicon `app/icon.svg`); transparent, readable at 28px. Replaces the PNG copies in the app; `images/` originals untouched.
+- [x] Sidebar: 200ms width transition with labels fading in; selected item is a lilac pill with espresso text. Reduced-motion users get no animation.
+- [x] Layout: shared `PageHeader` (title, description, hairline) on every page; consistent shell padding; Overview metrics in one divided grid plus a single status row.
+- [x] About: left column trimmed to intro, preview notice, button, credits. Receipt is white paper on a `surface` panel with larger type, muted "Brewing" status, plain detail lines, and only the header, planned tools, import steps, and one footnote (removed the two status lines and the sign-off).
+- [x] Follow-up: dashboard content now starts 264px from the left edge (72px rail + 192px padding, left-aligned, max 1024px wide) so the expanded 240px rail never covers it.
+- Verification: lint, **29 tests**, and production build passed. Checked with headless Edge: Overview, About, and Sales at 1440px; rail width measured mid-transition (72 to ~201 to 240 on hover, 240 to ~125 to 72 on leave); About and the open menu at 390px.
+
 ## Humbleicons, Schibsted Grotesk, receipt About page (2026-11-03)
 - [x] Icons: replaced Doodle Icons with Humbleicons by Jiří Zralý (MIT), per the user's request for a set made by a real individual designer. Generator now writes `components/icons/icon-paths.ts`; license in `HUMBLEICONS-LICENSE.txt`; credit on the About page.
 - [x] Body font: Hanken Grotesk → Schibsted Grotesk (verified tabular figures in-browser; Commissioner, Gantari, and Wix Madefor were rejected for proportional digits). Added Spline Sans Mono as `font-mono` for the receipt only.

@@ -1,13 +1,14 @@
 import Link from "next/link";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "inverse";
+type Variant = "primary" | "secondary" | "outline" | "ghost" | "inverse";
 type Size = "md" | "lg";
 
 // Hover states only swap colors instantly: no motion, no shadow (brand rule).
 const variants: Record<Variant, string> = {
   primary: "bg-espresso text-white hover:bg-espresso/85",
   secondary: "bg-lilac text-espresso hover:bg-lilac/70",
+  outline: "border border-espresso bg-white text-espresso hover:bg-espresso/5",
   ghost: "bg-transparent text-espresso hover:bg-espresso/5",
   inverse: "bg-white text-espresso hover:bg-white/90",
 };

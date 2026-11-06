@@ -1,8 +1,8 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-/** White content surface. Whitespace separates content without decorative effects. */
+/** White content surface with a 1px espresso outline. No fills, shadows, or effects. */
 export function Card({ className = "", ...rest }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={`rounded-2xl bg-white p-6 ${className}`} {...rest} />;
+  return <div className={`rounded-xl border border-espresso bg-white p-6 ${className}`} {...rest} />;
 }
 
 export function CardTitle({ children, description }: { children: ReactNode; description?: ReactNode }) {

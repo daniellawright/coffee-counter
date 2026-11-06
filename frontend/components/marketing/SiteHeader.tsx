@@ -14,7 +14,7 @@ export function SiteHeader() {
   const close = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-white" onKeyDown={(event) => {
+    <header className="sticky top-0 z-40 border-b border-espresso bg-white" onKeyDown={(event) => {
       if (event.key === "Escape" && open) { close(); toggle.current?.focus(); }
     }}>
       <Container className="flex h-16 items-center justify-between gap-6">
@@ -40,7 +40,7 @@ export function SiteHeader() {
         <button
           ref={toggle}
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-espresso hover:bg-espresso/85 md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-espresso text-white hover:bg-espresso/85 md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}

@@ -24,7 +24,7 @@ it("marks only the active section and supports mobile navigation and Escape", as
   expect(screen.getByRole("button", { name: "Open workspace menu" })).toHaveFocus();
 });
 
-it("keeps account access in the rail and shows labels to assistive tech while collapsed", () => {
+it("keeps account access at the foot of the always-open sidebar with every label present", () => {
   render(<Sidebar />);
   const nav = within(screen.getByRole("navigation", { name: "Workspace" }));
   expect(nav.getByRole("link", { name: "Account" })).toHaveAttribute("href", "/login");

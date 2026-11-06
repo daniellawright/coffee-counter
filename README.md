@@ -2,7 +2,7 @@
 
 **Every cup counts.** Coffee shop analytics and data engineering, built with Next.js, TypeScript, and PostgreSQL, with Python/FastAPI, dbt, and Airflow planned for the data pipeline.
 
-Milestone 1 provides a dashboard-first home, responsive workspace navigation, and honest empty states. The sidebar's About CoffeeCounter page explains the tool and planned features. The brand mark and favicon use the user's original logo in `images/coffee-counter-logo.png`. Demo analytics, file uploads, accounts, and backend processing are not available yet. See [TASKS.md](TASKS.md) for progress and [the specification](docs/coffee-counter-specs.md) for the original product requirements, with subsequent user decisions recorded in [CLAUDE.md](CLAUDE.md).
+Milestone 1 provides a short marketing homepage at `/`, the workspace Overview at `/dashboard`, responsive workspace navigation, and honest empty states. The sidebar's About page explains the tool and planned features, and notes that Claude was used as an assistant for the project. The brand mark and favicon are `frontend/public/brand/coffee-counter-logo.svg`. Demo analytics, file uploads, accounts, and backend processing are not available yet. See [TASKS.md](TASKS.md) for progress and [the specification](docs/coffee-counter-specs.md) for the original product requirements, with subsequent user decisions recorded in [CLAUDE.md](CLAUDE.md).
 
 ## Local setup
 
@@ -36,7 +36,7 @@ npx tsc --noEmit
 npm run build
 ```
 
-The app uses Young Serif (headings, wordmark), Schibsted Grotesk (interface, tabular numerals), and Spline Sans Mono (the About receipt) through `next/font/google`, so production builds need network access to download them. Icons are [Humbleicons](https://github.com/zraly/humbleicons) by Jiří Zralý (MIT; license in `frontend/components/icons/HUMBLEICONS-LICENSE.txt`); `npm run icons` regenerates the small subset the app uses. The page background and light surfaces are white. Run a successful production build with `npm start`.
+The app uses Young Serif (headings, wordmark), Schibsted Grotesk (interface, tabular numerals), and Spline Sans Mono (the About receipt) through `next/font/google`, so production builds need network access to download them. Icons are [Tabler Icons](https://github.com/tabler/tabler-icons) by Paweł Kuna (MIT; license in `frontend/components/icons/TABLER-LICENSE.txt`); `npm run icons` regenerates the small subset the app uses. The page background and light surfaces are white. Run a successful production build with `npm start`.
 
 If PowerShell blocks `npm.ps1` or `npx.ps1`, use `npm.cmd` and `npx.cmd` for these commands; no execution-policy change is needed.
 

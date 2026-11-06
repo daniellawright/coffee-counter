@@ -4,8 +4,8 @@ import { Container } from "@/components/ui/Section";
 import { tagline } from "@/lib/brand";
 
 const links = [
-  { label: "Dashboard", href: "/" },
-  { label: "About CoffeeCounter", href: "/about" },
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "About", href: "/about" },
   { label: "Explore Demo", href: "/demo" },
   { label: "Upload Your Data", href: "/upload" },
   { label: "Log In", href: "/login" },
