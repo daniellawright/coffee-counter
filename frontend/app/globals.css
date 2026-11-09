@@ -3,7 +3,6 @@
 @theme {
   --color-espresso: #33261f;
   --color-caramel: #c99260;
-  --color-lilac: #c4bfdf;
   --color-white: #ffffff;
   /* Neutral divider derived from espresso; never a decorative colored border. */
   --color-line: rgb(51 38 31 / 0.12);
@@ -38,6 +37,73 @@ body {
   outline-color: var(--color-white);
 }
 
+/* A white panel inside a dark surface (the account menu) keeps the dark outline. */
+[data-light-surface] :focus-visible {
+  outline-color: var(--color-espresso);
+}
+
+/*
+ * Motion (user request 2026-11-08): subtle and calm. Only opacity, small translations, and
+ * color changes; no shadows, glows, or gradients. Everything below is switched off for
+ * people who prefer reduced motion (see the media query at the end).
+ */
+
+/* Links and buttons fade between hover, focus, and current states instead of snapping. */
+a,
+button {
+  transition-property: color, background-color, border-color, text-decoration-color, opacity, transform, translate, scale;
+  transition-duration: 160ms;
+  transition-timing-function: ease-out;
+}
+
+/* Homepage hover lift (hero buttons and tool cards): a 2px rise; the element supplies its own transition. */
+.hover-lift:hover {
+  translate: 0 -2px;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* A page easing in after navigation (used by the route templates). */
+.animate-enter {
+  animation: enter 420ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+/* Menus and panels appearing. */
+.animate-pop {
+  animation: pop 160ms ease-out backwards;
+}
+
+/*
+ * Cards and sections fade up as they scroll into view. Pure CSS (scroll-driven
+ * animation), so nothing is hidden where it is unsupported or JavaScript is off.
+ */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -47,36 +113,14 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
 
-/*
- * Home receipts slide up from below, one after the other (user request 2026-11-04).
- * They start hidden and offset; Reveal sets data-revealed="true" when they scroll into
- * view, and each receipt's --rise-delay staggers them. Reduced motion shows them still.
- */
-.receipt-rise {
-  opacity: 0;
-  translate: 0 130%; /* starts below the dark panel, which clips it */
-}
-
-[data-revealed="true"] .receipt-rise {
-  animation: receipt-rise 1000ms cubic-bezier(0.22, 1, 0.36, 1) var(--rise-delay, 0ms) both;
-}
-
-@keyframes receipt-rise {
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .receipt-rise {
-    opacity: 1;
-    translate: none;
-  }
-
-  [data-revealed="true"] .receipt-rise {
+  .animate-enter,
+  .animate-pop,
+  .reveal {
     animation: none !important;
+  }
+
+  .hover-lift:hover {
+    translate: none !important;
   }
 }

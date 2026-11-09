@@ -40,7 +40,7 @@ export function Sidebar() {
     <aside className="lg:w-[248px] lg:shrink-0">
       <div
         data-dark-surface
-        className="bg-espresso text-white lg:fixed lg:inset-y-0 lg:left-0 lg:z-40 lg:flex lg:w-[248px] lg:flex-col lg:overflow-y-auto"
+        className="bg-espresso text-white lg:fixed lg:top-[var(--banner-height,0px)] lg:bottom-0 lg:left-0 lg:z-40 lg:flex lg:w-[248px] lg:flex-col lg:overflow-y-auto"
         onKeyDown={(event) => {
           if (event.key === "Escape" && open) { close(); toggle.current?.focus(); }
         }}
@@ -55,7 +55,7 @@ export function Sidebar() {
           </button>
         </div>
 
-        <nav id="dashboard-menu" aria-label="Workspace" className={`${open ? "flex" : "hidden"} flex-1 flex-col lg:flex`}>
+        <nav id="dashboard-menu" aria-label="Workspace" className={`${open ? "flex animate-pop lg:animate-none" : "hidden"} flex-1 flex-col lg:flex`}>
           {navGroups.map((group, index) => (
             <div key={group} className={`py-2.5 ${index < navGroups.length - 1 ? "border-b border-white/[0.12]" : ""}`}>
               <p id={`nav-group-${index}`} className="px-5 pt-2.5 pb-2 font-mono text-[10.5px] leading-none font-medium tracking-[0.12em] text-white/50 uppercase">{group}</p>

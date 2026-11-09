@@ -2,16 +2,16 @@ import type { HTMLAttributes, ReactNode } from "react";
 
 /*
  * A paper receipt: torn zigzag top and bottom, monospace lines with dot leaders. White
- * paper by default; `paper="lilac"` prints on lilac for contrast. Meant to sit on a
+ * paper by default; `paper="caramel"` prints on caramel for contrast. Meant to sit on a
  * contrasting surface (`bg-surface` on white pages, espresso on the homepage), which is
  * what makes the paper edge visible (no borders, shadows, or gradients). A fixed tooth
  * count stretches to any width so the edges always meet the sides.
  */
 const TEETH = 20;
 
-type Paper = "white" | "lilac";
-const paperBody: Record<Paper, string> = { white: "bg-white", lilac: "bg-lilac" };
-const paperEdge: Record<Paper, string> = { white: "text-white", lilac: "text-lilac" };
+type Paper = "white" | "caramel";
+const paperBody: Record<Paper, string> = { white: "bg-white", caramel: "bg-caramel" };
+const paperEdge: Record<Paper, string> = { white: "text-white", caramel: "text-caramel" };
 
 function TornEdge({ side, paper }: { side: "top" | "bottom"; paper: Paper }) {
   const points = Array.from({ length: TEETH * 2 + 1 }, (_, i) => {

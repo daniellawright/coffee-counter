@@ -1,8 +1,8 @@
 # CoffeeCounter
 
-**Every cup counts.** Coffee shop analytics and data engineering, built with Next.js, TypeScript, and PostgreSQL, with Python/FastAPI, dbt, and Airflow planned for the data pipeline.
+**Every cup counts!** Coffee shop analytics and data engineering, built with Next.js, TypeScript, and PostgreSQL, with Python/FastAPI, dbt, and Airflow planned for the data pipeline.
 
-Milestone 1 provides a short marketing homepage at `/`, the workspace Overview at `/dashboard`, responsive workspace navigation, and honest empty states. The sidebar's About page explains the tool and planned features, and notes that Claude was used as an assistant for the project. The brand mark and favicon are `frontend/public/brand/coffee-counter-logo.svg`. Demo analytics, file uploads, accounts, and backend processing are not available yet. See [TASKS.md](TASKS.md) for progress and [the specification](docs/coffee-counter-specs.md) for the original product requirements, with subsequent user decisions recorded in [CLAUDE.md](CLAUDE.md).
+Milestone 1 provides a short marketing homepage at `/`, the workspace Overview at `/dashboard`, responsive workspace navigation, and honest empty states. The homepage explains what each dashboard page will do, and the public About page tells the story behind the project and notes that Claude was used as an assistant for it. The brand mark and favicon are `frontend/public/brand/coffee-counter-logo.svg`. Demo analytics, file uploads, accounts, and backend processing are not available yet. See [TASKS.md](TASKS.md) for progress and [the specification](docs/coffee-counter-specs.md) for the original product requirements, with subsequent user decisions recorded in [CLAUDE.md](CLAUDE.md).
 
 ## Local setup
 

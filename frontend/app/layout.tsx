@@ -20,7 +20,7 @@ const youngSerif = Young_Serif({
 });
 
 export const metadata: Metadata = {
-  title: { default: "CoffeeCounter — Every cup counts.", template: "%s · CoffeeCounter" },
+  title: { default: "CoffeeCounter — Every cup counts!", template: "%s · CoffeeCounter" },
   description:
     "Turn your coffee shop's sales data into meaningful insights. Understand your customers, track performance, and make smarter business decisions.",
 };

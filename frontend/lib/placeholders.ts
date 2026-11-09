@@ -12,7 +12,7 @@ export type DashboardFeature = keyof typeof dashboardPlaceholders;
 
 export const publicPlaceholders = {
   demo: { heading: "Explore the demo", title: "The demo is not available yet", body: "The public demo will use real coffee vending machine sales, with its source and limitations clearly identified. The dataset has not been connected yet.", action: "Open dashboard", href: "/dashboard" },
-  upload: { heading: "Upload your data", title: "Uploads are not available yet", body: "Guest CSV and Excel imports are still in development. No files can be uploaded or stored yet. Previewing, column mapping, and validation will be part of this workflow.", action: "See how it will work", href: "/about#how-it-works" },
+  upload: { heading: "Upload your data", title: "Uploads are not available yet", body: "Guest CSV and Excel imports are still in development. No files can be uploaded or stored yet. Previewing, column mapping, and validation will be part of this workflow.", action: "See how it will work", href: "/#data-imports" },
   login: { heading: "Log in", title: "Sign-in is not available yet", body: "Accounts and private business workspaces are still in development. No sign-in details are collected on this page.", action: "Back to CoffeeCounter", href: "/" },
   register: { heading: "Get started", title: "Registration is not available yet", body: "Business accounts are still in development. You can explore the workspace layout while we build registration and private data storage.", action: "Open dashboard", href: "/dashboard" },
 } as const;

@@ -16,7 +16,6 @@ const used = [
   "file-upload",
   "route",
   "settings",
-  "info-circle",
   "user-circle",
   "menu-2",
   "x",
@@ -24,6 +23,7 @@ const used = [
   "currency-dollar",
   "receipt",
   "coffee",
+  "alert-triangle",
 ];
 
 const entries = used.map((name) => {

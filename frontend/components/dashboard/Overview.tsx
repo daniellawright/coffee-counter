@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRightIcon, CoffeeIcon, ForecastIcon, ReceiptIcon, RevenueIcon, type IconProps } from "@/components/icons/Icons";
 import { Card } from "@/components/ui/Card";
+import { IconTile } from "@/components/ui/IconTile";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { counterMetrics } from "@/lib/content";
 
@@ -24,11 +25,7 @@ export function Overview() {
           return (
             <Card key={label}>
               <dt className="flex items-center gap-3 text-sm text-muted">
-                {Icon ? (
-                  <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lilac text-espresso">
-                    <Icon size={18} />
-                  </span>
-                ) : null}
+                {Icon ? <IconTile icon={Icon} size="sm" /> : null}
                 {label}
               </dt>
               <dd className="mt-5 text-3xl font-medium tabular-nums">
@@ -46,7 +43,7 @@ export function Overview() {
 
       <Card className="mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-4 text-sm">
         <p className="text-muted">No business connected. Imports are still in development.</p>
-        <Link href="/about#how-it-works" className="inline-flex items-center gap-1.5 rounded-sm font-medium hover:text-espresso/70">
+        <Link href="/#data-imports" className="inline-flex items-center gap-1.5 rounded-sm font-medium hover:text-espresso/70">
           How imports will work
           <ArrowRightIcon size={16} />
         </Link>

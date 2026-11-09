@@ -1,50 +1,64 @@
+import { SplitCard } from "@/components/marketing/SplitCard";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Section";
-import { HomeReceipts } from "@/components/marketing/HomeReceipts";
 import { tagline } from "@/lib/brand";
-
-/** A row of five tally marks (four strokes and the crossing one), drawn once in caramel. */
-function Tally() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 64 36" width="64" height="36" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" className="mx-auto text-caramel">
-      <path d="M9 3v30M22 3v30M35 3v30M48 3v30M3 27L58 9" />
-    </svg>
-  );
-}
+import { dashboardSections } from "@/lib/content";
+import { dashboardNav } from "@/lib/navigation";
 
 /*
- * Home: tally marks, the catchphrase in the display font, the problem and then what
- * CoffeeCounter is for, the way into the dashboard (the main product), a note on trying
- * it with sample data, then the receipts. Copy makes no performance claims and says
- * plainly what is still in development, including that the sample-data demo is not
- * connected yet.
+ * Home: the catchphrase in the display font, the problem and what the dashboard does, the
+ * way into the dashboard (the main product) and the demo, a note on what the demo will use
+ * (the under-construction notice lives on the dashboard), then a tour of the dashboard tools,
+ * one full-width card each. All wording is the author's own (see `lib/content.ts` for the
+ * tour); do not rewrite it without asking.
  */
 export default function Home() {
   return (
     <>
       <Container className="pt-16 pb-16 text-center sm:pt-24 sm:pb-20">
-        <Tally />
-        <h1 className="mt-8 font-display text-5xl leading-tight sm:text-7xl">{tagline}</h1>
-        <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed sm:text-xl">
-          Many coffee shops sit on months of sales records they never get to use. The numbers are stuck in point-of-sale exports and spreadsheets, so deciding what to stock, when to staff, and what to prepare comes down to guesswork.
+        <h1 className="font-display text-5xl leading-tight sm:text-7xl">{tagline}</h1>
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed sm:text-xl">
+          Coffee shops can have months of sales records without ever getting the chance to discover what those numbers might reveal.
         </p>
-        <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-          CoffeeCounter is being built to turn those files into a clear picture in plain language: what sells, when you’re busiest, and what to prepare next, with no data skills required.
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed sm:text-xl">
+          Sales data often comes from point-of-sale systems and spreadsheets. This dashboard brings everything together to make it easier to spot patterns, discover your customers&apos; favorite drinks, and make decisions about what to stock, when to staff, and what to prepare.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <ButtonLink href="/dashboard" size="lg">Open dashboard</ButtonLink>
-          <ButtonLink href="/demo" size="lg" variant="outline">Explore the demo</ButtonLink>
+          <ButtonLink href="/dashboard" size="lg" className="hover-lift">Open dashboard</ButtonLink>
+          <ButtonLink href="/demo" size="lg" variant="outline" className="hover-lift">Explore the demo</ButtonLink>
         </div>
 
-        <section aria-labelledby="sample-data" className="mx-auto mt-14 max-w-xl">
-          <h2 id="sample-data" className="font-mono text-[10.5px] leading-none font-medium tracking-[0.12em] text-muted uppercase">Try it with sample data</h2>
-          <p className="mt-3 leading-relaxed text-muted">
-            The demo is being set up with a public dataset of real coffee vending machine sales, so you can explore the dashboard without an account or any data of your own. It isn’t connected yet, so the dashboard is empty for now. No numbers are made up.
+        <section aria-label="About the demo" className="mx-auto mt-12 max-w-2xl">
+          <p className="leading-relaxed text-muted">
+            The demo will use a publicly available dataset of real coffee vending machine sales, so you can explore the dashboard without creating an account or uploading your own data.
           </p>
         </section>
       </Container>
-      <HomeReceipts />
+
+      <section aria-labelledby="inside-dashboard" className="border-t border-line">
+        <Container className="py-20 sm:py-24">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 id="inside-dashboard" className="font-display text-3xl sm:text-4xl">What’s inside the dashboard</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted">Here’s a quick look at what each tool in the dashboard does:</p>
+          </div>
+
+          <ul className="mt-12 space-y-5">
+            {dashboardSections.map(({ id, href, body }) => {
+              const nav = dashboardNav.find((item) => item.href === href)!;
+              return (
+                <li key={id} id={id} className="reveal scroll-mt-24">
+                  <SplitCard title={nav.label} icon={nav.icon} href={href}>
+                    {body.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </SplitCard>
+                </li>
+              );
+            })}
+          </ul>
+        </Container>
+      </section>
     </>
   );
 }

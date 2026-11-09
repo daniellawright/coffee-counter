@@ -32,7 +32,6 @@ export const InventoryIcon = (props: IconProps) => <Icon {...props} name="packag
 export const UploadIcon = (props: IconProps) => <Icon {...props} name="file-upload" />;
 export const PipelineIcon = (props: IconProps) => <Icon {...props} name="route" />;
 export const SettingsIcon = (props: IconProps) => <Icon {...props} name="settings" />;
-export const AboutIcon = (props: IconProps) => <Icon {...props} name="info-circle" />;
 export const UserIcon = (props: IconProps) => <Icon {...props} name="user-circle" />;
 export const MenuIcon = (props: IconProps) => <Icon {...props} name="menu-2" />;
 export const CloseIcon = (props: IconProps) => <Icon {...props} name="x" />;
@@ -40,3 +39,4 @@ export const ArrowRightIcon = (props: IconProps) => <Icon {...props} name="arrow
 export const RevenueIcon = (props: IconProps) => <Icon {...props} name="currency-dollar" />;
 export const ReceiptIcon = (props: IconProps) => <Icon {...props} name="receipt" />;
 export const CoffeeIcon = (props: IconProps) => <Icon {...props} name="coffee" />;
+export const AlertIcon = (props: IconProps) => <Icon {...props} name="alert-triangle" />;
